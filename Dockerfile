@@ -14,11 +14,18 @@ RUN apk add --no-cache \
     ttf-freefont \
     udev \
     ttf-liberation \
-    font-noto-emoji
+    font-noto-emoji \
+    python3 \
+    wget
 
 # Configure Puppeteer to use installed Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+# Install yt-dlp for video downloading
+RUN mkdir -p /usr/local/bin && \
+    wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp && \
+    chmod a+rx /usr/local/bin/yt-dlp
 
 # Install n8n-nodes-puppeteer in a permanent location
 RUN mkdir -p /opt/n8n-custom-nodes && \
