@@ -45,7 +45,11 @@ yt-dlp --version
 If you need to update yt-dlp to the latest version manually:
 
 ```bash
-docker-compose exec n8n sh
+# Update using yt-dlp's built-in updater (requires root access)
+docker-compose exec -u root n8n yt-dlp -U
+
+# Or manually download the latest version
+docker-compose exec -u root n8n sh
 wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
 chmod a+rx /usr/local/bin/yt-dlp
 ```
